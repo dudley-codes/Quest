@@ -45,8 +45,6 @@ namespace Quest
       // Make a new "Adventurer" object using the "Adventurer" class
       Console.Write("What is your name? ");
       string adventurer = Console.ReadLine();
-
-
       Adventurer theAdventurer = new Adventurer(adventurer);
 
       // A list of challenges for the Adventurer to complete
@@ -61,10 +59,22 @@ namespace Quest
             };
 
       // Loop through all the challenges and subject the Adventurer to them
-      foreach (Challenge challenge in challenges)
+      void ChallengeLoop()
       {
-        challenge.RunChallenge(theAdventurer);
+
+        foreach (Challenge challenge in challenges)
+        {
+          challenge.RunChallenge(theAdventurer);
+        }
+        // ask the user if they'd like to repeat the quest after the it has been completed. If the user says "yes", start the quest over. Otherwise, end the program.
+        Console.Write("Would you like to play again? Y/N ");
+        if (Console.ReadLine().ToLower() == "y")
+        {
+          ChallengeLoop();
+        }
       }
+
+      ChallengeLoop();
 
       // This code examines how Awesome the Adventurer is after completing the challenges
       // And praises or humiliates them accordingly
